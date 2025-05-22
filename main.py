@@ -18,6 +18,17 @@ contador_id = 1
 async def root():
     return {"mensagem": "Bem-vindo à API!"}
 
+@app.get("/health")
+async def health_check():
+    return {
+        "status": "online",
+        "versao": "1.0.0",
+        "servicos": {
+            "api": "operacional",
+            "banco_dados": "operacional"
+        }
+    }
+
 @app.get("/items", response_model=List[Item])
 async def listar_items():
     return items

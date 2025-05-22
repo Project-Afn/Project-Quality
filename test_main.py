@@ -12,6 +12,15 @@ def test_root():
     assert response.status_code == 200
     assert response.json() == {"mensagem": "Bem-vindo à API!"}
 
+def test_health_check():
+    response = client.get("/health")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "online"
+    assert data["versao"] == "1.0.0"
+    assert data["servicos"]["api"] == "operacional"
+    assert data["servicos"]["banco_dados"] == "operacional"
+
 def test_criar_item():
     item_data = {
         "nome": "Item Teste",
