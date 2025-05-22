@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from typing import List
-f import Item
+from models import Item
 
 app = FastAPI(title="Minha API")
 
