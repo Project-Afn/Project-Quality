@@ -1,55 +1,70 @@
-# API Python com FastAPI
+# API de Gerenciamento de Itens
 
-Esta é uma API simples construída com FastAPI que permite gerenciar itens.
+Esta é uma API RESTful construída com FastAPI para gerenciamento de itens.
+
+## Funcionalidades
+
+- Listar todos os itens
+- Obter um item específico por ID
+- Criar novos itens
+- Verificação de saúde da API
+
+## Requisitos
+
+- Python 3.7+
+- FastAPI
+- Pydantic
 
 ## Instalação
 
-1. Instale as dependências:
+1. Clone o repositório
+2. Instale as dependências:
 ```bash
-pip install -r requirements.txt
+pip install fastapi uvicorn
 ```
 
-2. Execute o servidor:
+## Executando a API
+
+Para iniciar o servidor, execute:
+
 ```bash
 uvicorn main:app --reload
 ```
 
-## Testes
-
-Para executar os testes automatizados:
-```bash
-pytest test_main.py -v
-```
-
-### CI/CD
-Os testes são executados automaticamente através do GitHub Actions quando:
-- Um push é feito para a branch `main`
-- Um Pull Request é criado para a branch `main`
-
-O workflow testa a aplicação em diferentes versões do Python (3.9, 3.10 e 3.11).
+A API estará disponível em `http://localhost:8000`
 
 ## Endpoints
 
 ### GET /
 - Retorna uma mensagem de boas-vindas
 
+### GET /health
+- Verifica o status da API
+- Retorna informações sobre a versão e serviços
+
 ### GET /items
 - Lista todos os itens cadastrados
+- Retorna uma lista de itens
 
 ### GET /items/{item_id}
-- Retorna um item específico pelo ID
+- Obtém um item específico pelo ID
+- Retorna os detalhes do item ou erro 404 se não encontrado
 
 ### POST /items
 - Cria um novo item
-- Exemplo de corpo da requisição:
+- Corpo da requisição:
 ```json
 {
-    "nome": "Exemplo",
-    "descricao": "Descrição do exemplo"
+    "nome": "string",
+    "descricao": "string (opcional)"
 }
 ```
 
-## Documentação
-A documentação interativa da API está disponível em:
-- Swagger UI: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc 
+## Modelo de Dados
+
+```python
+class Item:
+    id: Optional[int]
+    nome: str
+    descricao: Optional[str]
+``` 
