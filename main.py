@@ -1,16 +1,9 @@
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-from typing import List, Optional
+from typing import List
+f import Item
 
 app = FastAPI(title="Minha API")
 
-# Modelo de dados para os itens
-class Item(BaseModel):
-    id: Optional[int] = None
-    nome: str
-    descricao: Optional[str] = None
-
-# Lista para armazenar os itens (simulando um banco de dados)
 items = []
 contador_id = 1
 
